@@ -36,18 +36,20 @@ error_val = zeros(length(lambda_vec), 1);
 %           ....
 %           
 %       end
-%
-%
 
+    for i=1:length(lambda_vec)
+        % let's extract the lambda so we can save time typing
+        lambda = lambda_vec(i);
 
+        % let's calculate the values of the thetas for the network
+        theta = trainLinearReg(X, y, lambda);
 
-
-
-
-
-
-
-
+        % and now we calculate the errors, remember that lambda must be zero to calculate the error
+        % because we will not use regularization
+        error_train(i) = linearRegCostFunction(X, y, theta, 0);
+        error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+    end
+   
 % =========================================================================
 
 end

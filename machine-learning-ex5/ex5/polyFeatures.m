@@ -15,6 +15,12 @@ X_poly = zeros(numel(X), p);
 %
 % 
 
+% we loop through all the values of p and create a new column
+% with X^p
+
+for i=1:p
+  X_poly(:, i) = X .^ i;
+end
 
 
 

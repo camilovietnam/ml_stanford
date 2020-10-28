@@ -53,11 +53,21 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
+for i = 1:m
+    % let's take only the first 'i' training examples
+    X_training = X(1:i, :);
 
+    % for those, let's take only the first 'i' solutions
+    Y_training = y(1:i);
 
+    % let's calculate the values of theta for the network
+    theta = trainLinearReg(X_training, Y_training, lambda);
 
-
-
+    % and now we calculate the errors, remembering to pass lambda as 0
+    % so that we don't apply regularization
+    error_train(i) = linearRegCostFunction(X_training, Y_training, theta, 0);
+    error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+ end
 
 % -------------------------------------------------------------
 
