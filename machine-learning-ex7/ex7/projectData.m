@@ -19,8 +19,23 @@ Z = zeros(size(X, 1), K);
 %
 
 
+	% You can iterate all the examples to obtain their projections
+	for i=1:length(X);
+		example = X(i, :)';
+		
+		% You can obtain each projection of the example using 
+		% a loop
+		for k=1:K
+			Z(i,k) = example' * U(:, k);
+		end
+		
+		% ALternative: Obtain all projections at once using
+		% product of a matrix
+		Z(i, :) = example' * U(:, 1:K);
+	end
 
-
+	% alternative: Use product of matrices instead of a loop
+	Z = X * U(:, 1:K);
 % =============================================================
 
 end

@@ -34,9 +34,7 @@ total = zeros(length(X), 1);
 % according to the indexes in idx.
 for i = 1:length(X)
 	example = X(i, :);
-	centid = idx(i, :);
-	
-	
+	centid = idx(i, :);	
 	sums(centid, :) = sums(centid, :) + example;
 	total(centid, :) = total(centid) + 1;
 end
