@@ -22,6 +22,21 @@ X_rec = zeros(size(Z, 1), size(U, 1));
 %               
 
 
+% Iterate all projected examples 
+for i = 1:length(Z)
+
+	% On each example, project back to M dimensions, with the M being
+	% the total value of original eigen vectors (length of U)
+	for j = 1:length(U)
+		v = Z(i, :);
+    	X_rec(i, j) = v * U(j, 1:K)';
+    end
+end
+
+% alternative: Use product of matrices to 
+% calculate the original data
+
+X_rec = Z* U(:, 1:K)';
 
 % =============================================================
 
