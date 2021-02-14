@@ -26,12 +26,39 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
+% COMPUTECENTROIDS(X, idx, K)
+sums = zeros(length(X), size(X, 2));
+total = zeros(length(X), 1);
 
+% loop all the examples and add each one to a centroid
+% according to the indexes in idx.
+for i = 1:length(X)
+	example = X(i, :);
+	centid = idx(i, :);
+	
+	
+	sums(centid, :) = sums(centid, :) + example;
+	total(centid, :) = total(centid) + 1;
+end
 
+% calculate the new centroid dividing the sum by
+% the total
+for i=1:K
+	centroids(i, :) = sums(i, :) ./ total(i);
+end
 
+%%
+%% VARIANT: 
+%% You could also use the find() method to find directly
+% all the examples that belong to a given centroid: 
+%% 
 
-
-
+for i=1:K
+	% find the index where you match the current centroid
+	centroid_examples = find(idx == i);
+	% now, find the matching examples in X, add them (sum) and divide by total
+	centroids(i,:) = sum(X(centroid_examples, :)) / length(centroid_examples);
+end
 
 % =============================================================
 
